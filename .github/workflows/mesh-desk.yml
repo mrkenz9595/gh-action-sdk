@@ -11,11 +11,11 @@ jobs:
       - name: Checkout this repository
         uses: actions/checkout@v3
 
-      - name: Clone MeshDesk
+      - name: Clone openwrt-meshdesk
         run: |
-          mkdir -p package
-          git clone https://github.com/RADIUSdesk/openwrt-meshdesk.git tmp-meshdesk
-          cp -r tmp-meshdesk/package/* package/
+         mkdir -p package
+         git clone https://github.com/RADIUSdesk/openwrt-meshdesk.git tmp
+         cp -r tmp/source/* package/
       
       - name: Build using OpenWrt SDK
         uses: openwrt/gh-action-sdk@v1
