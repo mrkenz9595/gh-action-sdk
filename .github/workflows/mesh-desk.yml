@@ -1,4 +1,4 @@
-name: Build MeshDesk for OpenWrt IPQ50xx
+name: Build MeshDesk for IPQ50xx
 
 on:
   workflow_dispatch:
@@ -6,18 +6,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build MeshDesk
+    name: Build meshdesk + luci-app-meshdesk
     steps:
-      - name: Checkout this repository
+      - name: Checkout current repo
         uses: actions/checkout@v3
 
       - name: Clone openwrt-meshdesk
         run: |
-         mkdir -p package
-         git clone https://github.com/RADIUSdesk/openwrt-meshdesk.git tmp
-         cp -r tmp/source/* package/
-      
-      - name: Build using OpenWrt SDK
+          mkdir -p package
+          git clone https://github.com/RADIUSdesk/openwrt-meshdesk.git tmp
+          cp -r tmp/MESHdesk package/meshdesk
+          cp -r tmp/luci-app-meshdesk package/luci-app-meshdesk
+
+      - name: Build with OpenWrt SDK
         uses: openwrt/gh-action-sdk@v1
         with:
           target: ipq50xx
